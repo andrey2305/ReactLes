@@ -1,33 +1,56 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
-import Grid from 'react-bootstrap/lib/Button';
-import Row from 'react-bootstrap/lib/Button';
-import Col from 'react-bootstrap/lib/Button';
+import Grid from 'react-bootstrap/lib/Grid';
 import styled from 'styled-components';
+
+import Header from './components/Header';
+import Menu from './components/Menu';
+import Main from './components/Main';
+
+const url = process.env.PUBLIC_URL + '/img/bg.png';
+
+const HeaderWrapper = styled.header`
+    width: 100%;
+    height: 49px;
+    background-color: #242424;
+    opacity: 0.8;
+`
+const MenuWrapper = styled.div`
+    height: 90px;
+    padding-top: 20px;
+`
+
+const MainWrapper = styled.main`
+    height: 600px;
+    padding-top: 130px;
+    background: url(${url}) no-repeat;
+    background-size: cover;
+
+`
 
 class App extends Component {
   render() {
     return (
-        <div className="wrapper">
-            <h1>Hello World!!!</h1>
-            <FieldToForm id="name" name="Your name:" type="text" placeholder="Carl"/>
-            <FieldToForm id="surname" name="Your surname:" type="text" placeholder="Garsia"/>
-            <FieldToForm id="age" name="Your age:" type="number" placeholder="21"/>
-            <FieldToForm id="submit" type="submit" value="Send"/>
+        <div className=" App">
+            <HeaderWrapper>
+                <Grid>
+                    <Header />
+                </Grid>
+            </HeaderWrapper>
+            <MenuWrapper>
+                <Grid>
+                    <Menu />
+                </Grid>
+            </MenuWrapper>
+            <MainWrapper>
+                <Grid>
+                    <Main />
+                </Grid>
+            </MainWrapper> 
         </div>
     );
   }
-}
-
-function FieldToForm(props) {
-    return (
-        <div className="input">
-            <label htmlFor={props.id}>{props.name} </label>
-            <input id={props.id} type={props.type} placeholder={props.placeholder} value={props.value} />
-        </div>
-    )
 }
 
 export default App;
