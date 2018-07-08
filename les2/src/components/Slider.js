@@ -46,9 +46,11 @@ class Slider extends Component {
     intervalBetweenSlides() {
         if(this.state.autoplay === true) {
             if(this.state.active === this.state.max -1) {
-                this.state.active = 0
+            //this.state.active = 0
+            this.setState({active: 0})
             } else {
-                this.state.active++
+                //this.state.active++
+                this.setState(({active})=>({active: active + 1}))
             }
 
             this.setState({
@@ -57,7 +59,9 @@ class Slider extends Component {
         }
     }
 
-    toggleAutoPlay() {
+    
+    toggleAutoPlay= e=> {
+        e.preventDefault()
         this.setState({
             autoplay: !this.state.autoplay
         })
@@ -96,16 +100,16 @@ class Slider extends Component {
     }
 
     setSliderStyles() {
-        const transition = this.state.active * - 100/this.state.slides.lenght
+        const transition = this.state.active * (- 100 / this.state.slides.length)
 
         return {
-            width: (this.state.slides.lenght * 100) + '%',
+            width: (this.state.slides.length * 100) + '%',
             transform: `translateX(${transition}%)`
         }
     }
 
     renderSlides() {
-        const transition = 100/this.state.slides.lenght + '%'
+        const transition = 100/this.state.slides.length + '%'
 
         return this.state.slides.map((item, index)=>(
             <div
@@ -177,7 +181,7 @@ class Slider extends Component {
                 <div
                     className = "wrapper"
                     style = {this.setSliderStyles()}>
-                    {this.renderSlides()}
+                        {this.renderSlides()}
                 </div>
                 {this.renderArrows()}
 
@@ -187,7 +191,7 @@ class Slider extends Component {
 
                 <a 
                     href="" className = "toggle-play"
-                    onClick = {this.toggleAutoPlay()}>
+                    onClick = {this.toggleAutoPlay}>
                         {this.renderPlayStop()}
                 </a>
             </div>
